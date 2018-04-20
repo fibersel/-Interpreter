@@ -1,0 +1,12 @@
+main
+{
+ struct {
+    int a;
+ } kek;
+ ++;
+ --;
+ goto L;
+ int j = 6, k;
+ k = ( i + j ) * 2; /* ERROR – нет описания переменной i */
+L:write ("ERROR not detected");
+}

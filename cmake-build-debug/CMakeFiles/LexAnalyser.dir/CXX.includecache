@@ -1,0 +1,26 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/fibersell/Рабочий стол/LexAnalyser/cmake-build-debug/LexGetter.h
+iostream
+-
+cstring
+-
+regex
+-
+set
+-
+
+/home/fibersell/Рабочий стол/LexAnalyser/main.cpp
+iostream
+-
+fstream
+-
+cmake-build-debug/LexGetter.h
+/home/fibersell/Рабочий стол/LexAnalyser/cmake-build-debug/LexGetter.h
+
