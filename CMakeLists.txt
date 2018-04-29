@@ -3,4 +3,4 @@ project(LexAnalyser)
 
 set(CMAKE_CXX_STANDARD 11)
 
-add_executable(LexAnalyser main.cpp cmake-build-debug/LexGetter.h)
+add_executable(LexAnalyser main.cpp cmake-build-debug/LexGetter.h cmake-build-debug/Parser.h cmake-build-debug/CMakeFiles/CustomStruct.h)
