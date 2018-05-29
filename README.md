@@ -2,6 +2,6 @@
 simple C-language Interpreter
 
 Available types:
-  int,string,bool
+  \nint,string,bool
 Not implemented yet:
   functions,inner structures
