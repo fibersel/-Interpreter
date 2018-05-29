@@ -1,0 +1,51 @@
+main {
+
+    int i = 1,j;
+    j = 1;
+
+    /*if(j < 3){
+        write("ok");
+        if(j == 2)
+            goto S;
+        else if(j == 1)
+            write("else ok");
+        j++;
+    }
+    S:write("printer");
+    j = 1;
+    for(;j < 3;j++){
+        write("in cycle");
+        i = 1;
+        while(i < 4){
+            write("in double cycle");
+            if(i == 2)
+                break;
+            i++;
+        }
+    }*/
+
+
+    struct s1{
+        int i;
+        string s1;
+    };
+
+    struct s2{
+        int j;
+        string s2;
+    };
+
+    s1 x,y;
+    s2 z;
+
+    x.i = 3;
+    y.i = 5;
+    z.j = 4;
+    write(x.i,z.j);
+    y.s1 = "string3";
+    x = y;
+    write(x.i);
+    x.s1 = "string 1";
+    z.s2 = "string 2";
+    write(z.s2 + x.s1);
+}

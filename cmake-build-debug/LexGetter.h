@@ -4,8 +4,8 @@
 
 #include <iostream>
 #include <cstring>
-#include <regex>
 #include <set>
+#include <vector>
 
 #ifndef LEXANALYSER_LEXGETTER_H
 #define LEXANALYSER_LEXGETTER_H
@@ -16,10 +16,19 @@ using namespace std;
 enum type_of_lex
 {
     LEX_NULL,
-    LEX_AND, LEX_BOOL, LEX_DO, LEX_ELSE, LEX_IF, LEX_FOR,LEX_FALSE, LEX_INT, LEX_GOTO, LEX_BREAK, LEX_NOT, LEX_OR, LEX_MAIN, LEX_READ, LEX_TRUE, LEX_STRING, LEX_WHILE, LEX_WRITE, LEX_STRUCT,
+    LEX_AND, LEX_BOOL, LEX_DO, LEX_ELSE, LEX_IF, LEX_FOR,LEX_FALSE, LEX_INT, LEX_GOTO, LEX_BREAK, LEX_NOT, LEX_OR, LEX_MAIN, LEX_READ, LEX_TRUE, LEX_STRING, LEX_WHILE, LEX_WRITE, LEX_STRUCT, LEX_STRUCT_FIELD,
     LEX_SEMICOLON, LEX_COMMA, LEX_COLON, LEX_ASSIGN, LEX_LPAREN, LEX_RPAREN, LEX_EQ, LEX_LSS, LEX_GTR, LEX_PLUS, LEX_MINUS, LEX_TIMES, LEX_SLASH, LEX_LEQ, LEX_NEQ, LEX_GEQ, LEX_RBC, LEX_LBC,
-    LEX_NUM,LEX_CONST_STRING,LEX_UN_PLUS, LEX_UN_MINUS,
-    LEX_ID,LEX_END
+    LEX_NUM,LEX_CONST_STRING,LEX_UN_PLUS, LEX_UN_MINUS,LEX_CONCAT,LEX_POINT, LEX_EQ_STRING, LEX_LSS_STRING, LEX_GTR_STRING, LEX_LEQ_STRING, LEX_NEQ_STRING, LEX_GEQ_STRING,
+    LEX_ID,LEX_END,
+    POLIZ_FGO,
+    POLIZ_GO,
+    POLIZ_LABEL,
+    POLIZ_ADDRESS,
+    POLIZ_STACK_CLEAR,
+    LEX_POST_UN_PLUS,
+    LEX_POST_UN_MINUS,
+    LEX_PRE_UN_PLUS,
+    LEX_PRE_UN_MINUS
 };
 
 
@@ -33,6 +42,7 @@ public:
 
     type_of_lex get_type () { return t_lex; }
     int get_value () { return v_lex; }
+    void set_value(int v){ v_lex = v;}
     friend ostream& operator << ( ostream &s, Lex l ) {
         s << '(' << l.t_lex << ',' << l.v_lex << ");";
         return s;
@@ -44,14 +54,19 @@ class Ident
     char * name;
     bool declare;
     type_of_lex type;
+    bool goto_labael;
     bool assign;
     int value;
 public:
     Ident () {
         declare = false;
         assign = false;
+        goto_labael = false;
     }
 
+    bool get_goto_label(){
+        return goto_labael;
+    }
 
     char *get_name () {
         return name;
@@ -86,6 +101,10 @@ public:
 
     bool get_assign () {
         return assign;
+    }
+
+    void put_goto_label(){
+        goto_labael = true;
     }
 
 
@@ -139,10 +158,8 @@ int tabl_ident::put ( const char *buf ) {
 
 
 class Scanner {
-    enum state { H, IDENT, NUMB, COM, STR, DELIM, NEQ, ERR };
+    enum state { H, IDENT, NUMB, COM, STR, DELIM, STRUCT_FIELD };
     state CS;
-    static regex letter;
-    static regex digit;
     FILE *fp;
     char c;
     string buf;
@@ -181,18 +198,18 @@ public:
     static char *  TD[];
     static type_of_lex dlms[];
 
-    set<type_of_lex> getDelims(){
-        set<type_of_lex> tmp;
-        for (int i= 1; i < 21; i++)
-            tmp.insert(dlms[i]);
+    map<type_of_lex,string> getDelims(){
+        map<type_of_lex,string> tmp;
+        for (int i= 1; i < 22; i++)
+            tmp[dlms[i]] = TD[i];
         return tmp;
     }
 
 
-    set<type_of_lex> getWords(){
-        set<type_of_lex> tmp;
-        for (int i = 0; i < 19;i++)
-            tmp.insert(words[i]);
+    map<type_of_lex,string> getWords(){
+        map<type_of_lex,string> tmp;
+        for (int i = 0; i < 20;i++)
+            tmp[words[i]] = TW[i];
         return tmp;
     }
 
@@ -284,6 +301,7 @@ char *  Scanner:: TD[] = {
         "}",
         "++",
         "--",
+        ".",
         NULL
 };
 
@@ -310,18 +328,19 @@ type_of_lex Scanner::dlms[] = {
                 LEX_RBC,
                 LEX_UN_PLUS,
                 LEX_UN_MINUS,
+                LEX_POINT,
                 LEX_NULL
 };
 
 
 tabl_ident TID(100);
 vector<string> TCS;
-vector<string> TCN;
 
 Lex Scanner::get_lex() {
 
     CS = H;
 
+    bool struct_field = false;
 
     int d, j;
 
@@ -330,26 +349,43 @@ Lex Scanner::get_lex() {
     do {
         switch (CS) {
             case H:
-                if(c == '\n' || c == ' ' || c == '\r' || c == '\t') {
+                if(c == '.'){
+                    if(struct_field == true)
+                        throw "two points in a row";
+                    struct_field = true;
+                    add();
+                    gc();
+                    return Lex(LEX_POINT,21);
+                }
+                else if(c == '\n' || c == ' ' || c == '\r' || c == '\t') {
+                    struct_field = false;
                     gc();
                     break;
                 }
                 else if(c == '/'){
+                    struct_field = false;
                     gc();
                     if(c == '*')
                         CS = COM;
                     else return Lex(LEX_SLASH,13);
-                } else if(c == '\"')
+                } else if(c == '\"'){
+                    struct_field = false;
                     CS = STR;
+                }
                 else if(isalpha(c)) {
+                    struct_field = false;
                     CS = IDENT;
                     add();
                 } else if(isdigit(c)) {
+                    struct_field = false;
                     CS = NUMB;
                     add();
                 } else if(c == EOF){
+                    struct_field = false;
+                    fclose(fp);
                     return Lex(LEX_END);
                 } else {
+                    struct_field = false;
                     CS = DELIM;
                     add();
                 }
@@ -394,15 +430,13 @@ Lex Scanner::get_lex() {
                     add();
                     gc();
                 } else {
-                    TCN.push_back(buf);
-                    j = TCN.size() - 1;
-                    return Lex(LEX_NUM, j);
+                    return Lex(LEX_NUM, atoi(buf.c_str()));
                 }
                 break;
 
 
             case IDENT:
-                if(isalpha(c) || isdigit(c)){
+                if(isalpha(c) || isdigit(c)) {
                     add();
                     gc();
                 } else if ( j = look(buf.c_str(),TW)) {
@@ -412,6 +446,8 @@ Lex Scanner::get_lex() {
                     return Lex(LEX_ID,j);
                 }
                 break;
+
+
 
 
             case DELIM:

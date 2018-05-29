@@ -6,25 +6,43 @@
 
 #IncludeRegexTransform: 
 
+/home/fibersell/Рабочий стол/LexAnalyser/cmake-build-debug/Executer.h
+Stack.h
+/home/fibersell/Рабочий стол/LexAnalyser/cmake-build-debug/Stack.h
+
 /home/fibersell/Рабочий стол/LexAnalyser/cmake-build-debug/LexGetter.h
 iostream
 -
 cstring
 -
-regex
--
 set
+-
+vector
 -
 
 /home/fibersell/Рабочий стол/LexAnalyser/cmake-build-debug/Parser.h
+map
+-
+stack
+-
+Poliz.h
+/home/fibersell/Рабочий стол/LexAnalyser/cmake-build-debug/Poliz.h
+
+/home/fibersell/Рабочий стол/LexAnalyser/cmake-build-debug/Poliz.h
+LexGetter.h
+/home/fibersell/Рабочий стол/LexAnalyser/cmake-build-debug/LexGetter.h
+list
+-
+
+/home/fibersell/Рабочий стол/LexAnalyser/cmake-build-debug/Stack.h
 
 /home/fibersell/Рабочий стол/LexAnalyser/main.cpp
 iostream
 -
 fstream
 -
-cmake-build-debug/LexGetter.h
-/home/fibersell/Рабочий стол/LexAnalyser/cmake-build-debug/LexGetter.h
 cmake-build-debug/Parser.h
 /home/fibersell/Рабочий стол/LexAnalyser/cmake-build-debug/Parser.h
+cmake-build-debug/Executer.h
+/home/fibersell/Рабочий стол/LexAnalyser/cmake-build-debug/Executer.h
 

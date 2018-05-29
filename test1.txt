@@ -1,0 +1,37 @@
+main {
+
+    int i = 1;
+    bool b = false;
+
+    for (; i < 18; i = i + 1) {
+        if (b) {
+            write(i);
+            write("\n");
+        } else {}
+        b = not b;
+    }
+
+
+    struct s1 {
+        int x, y;
+        bool z;
+    };
+    s1 x;
+    x.x = 1;
+    struct s2{
+        string w1,w2;
+        bool a,b,c;
+    };
+    s2 y,z;
+    y.w1 = "test";
+    y.w2 = "file";
+    for (; x.x < 18; x.x = x.x + 1) {
+        if (b) {
+            write(x.x);
+            write("\n");
+        } else {}
+        b = not b;
+        write(y.w1,y.w2,b);
+    }
+    write("win");
+}

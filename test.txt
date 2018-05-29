@@ -1,41 +1,97 @@
 main
 {
- struct c {
-    int a;
- };
- c s;
-
- int a;
- ++a;
- --a;
- goto L;
- int b,i,k,j,heh;
- for(i = 0;i < 10;i++){
-    for(j = 0;j < 10;j++){
-        while(true){
-            write("kek");
-            read(heh);
-            1 + 3 / 2;
-            break;
-        }
-        not true;
-        i = 3 + j++ + a = b;
-        for(k = 0;k < 1;k++){
-            write("heh");}
-        break;
-        if(b < i)
-            write("heh");
-        else if (b == i)
-            write("lol");
-        else
-            read(a);
+    int i = 12 * (6 / 3 + 3/(3+2)),j = 2 + 3,k;
+    write(-i*j);
+    string halo = "halo";
+    (6 + i) * 12;
+    bool kek = true;
+    write(-i,"un minus test");
+    write(i,j,kek,halo);
+    string s,m;
+    goto L;
+    struct p{
+        int a;
+        string k;
+    };
+    p o,l;
+    L:j = 6;
+    write(j,"goto label coming");
+    i = 3;
+    j = 6;
+    o.a = j;
+    o.k = "i go to sleep";
+    l.a = 12;
+    l.k = "string";
+    p b = l = o;
+    write(b.a,b.k);
+    i++;
+    kek = ++i <= --j;
+    m = " good";
+    s = "heh" + m;
+    o.k = s;
+    write(i,j,-j / (5),"see here");
+    write( (i + j / (-3 * 2)),j,kek,i,"heh" + "lol",s);
+    kek = "heh" <= "meow";
+    write(kek,o.a,o.k);
+    k = j = i;
+    write(i,j,k);
+    o = l;
+    write(o.a,o.k);
+    kek = true;
+    if(kek)
+        write("heh");
+    else
+        write("lol");
+    write("win");
+    i = 0;
+    while(i < 12){
+        write("EEEE");
+        i++;
     }
-    break;
- }
- while (i < j){
-    write(a);
- }
 
- k = ( i + j ) * 2; /* ERROR – нет описания переменной i*/
- write ("ERROR not detected");
+    read(k);
+    write(k);
+    read(kek);
+    write(kek);
+
+    for(i = 1;i < 9;i++){
+        for(j = 3;j < 10;j++){
+            write("twice inside");
+            if(j == 7)
+                break;
+            else if(j + i == 10){
+                write(i,j);
+                write("time to goto");
+                write("let's go");
+                goto S;
+            }
+        }
+        S:write("haha,goto label test");
+        if(i == 5)
+            break;
+    }
+    write("time to sleep");
+
+    if(i > 1)
+        write("finalochka");
+    else
+        write("eeeee");
+
+    write("ha_ha","ha_ha");
+
+    for(i = 0;i < 10;i++)
+        for(j = 0;j < 5;j++)
+            for(k = 0;k < 3;k++)
+                write("a");
+
+    k = 3;
+    for(i = 7;i < 5;i++){
+        write("error");
+        break;
+        while(i < 7)
+            break;
+    }
+    write("no error");
+    i = (i++ + j) / k;
+    write(i);
 }

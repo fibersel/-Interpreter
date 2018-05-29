@@ -88,13 +88,16 @@
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="/home/fibersell/Рабочий стол/LexAnalyser/cmake-build-debug/CMakeFiles/CustomStruct.h">
+		<Unit filename="/home/fibersell/Рабочий стол/LexAnalyser/cmake-build-debug/Executer.h">
 			<Option target="LexAnalyser"/>
 		</Unit>
 		<Unit filename="/home/fibersell/Рабочий стол/LexAnalyser/cmake-build-debug/LexGetter.h">
 			<Option target="LexAnalyser"/>
 		</Unit>
 		<Unit filename="/home/fibersell/Рабочий стол/LexAnalyser/cmake-build-debug/Parser.h">
+			<Option target="LexAnalyser"/>
+		</Unit>
+		<Unit filename="/home/fibersell/Рабочий стол/LexAnalyser/cmake-build-debug/Stack.h">
 			<Option target="LexAnalyser"/>
 		</Unit>
 		<Unit filename="/home/fibersell/Рабочий стол/LexAnalyser/main.cpp">

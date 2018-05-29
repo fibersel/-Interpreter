@@ -1,0 +1,55 @@
+main {
+
+    struct s1 {
+        int x , y ;
+        bool z;
+    };
+
+
+    struct s2 {
+        string w1 , w2 ;
+        bool a,b,c;
+    };
+    bool b = false;
+    string p = "program", s;
+    s1 x;
+    s2 y,z;
+    x.x = 1;
+    x.y = -1;
+    y.w1 = "test";
+    y.w2 = "file";
+    z.w1 = "test";
+    z.w2 = "file";
+    write(y.w1+y.w2);
+    write("\n");
+
+    for (; x.x < 3; x.x = x.x + 1) {
+        if (b) {
+            write(x.x);
+            write("\n");
+        } else {}
+        b = not b;
+    }
+
+    write("\n");
+
+    x.y = -x.y*10;
+    s = "1";
+
+
+    while(true){
+        if (x.y>0) {}
+        else break;
+        s = "0" + s;
+        x.y = x.y - 1;
+    }
+
+
+    S:write(s);
+    write("");
+    y.a = y.b = y.c = true;
+    y.w2 = y.w1 + p;
+    z = y;
+    write(z.w2);
+
+}
